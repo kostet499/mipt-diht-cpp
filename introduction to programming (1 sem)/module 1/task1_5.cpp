@@ -33,7 +33,7 @@ void ComputeSquares (int* squares_list, int n)
     squares_list[0] = 1;
     for (int i = 1; i < n; i++) 
     {
-        squares_list[i] = squares_list[i - 1] + i + i + 1;
+        squares_list[i] = squares_list[i - 1] + (i << 1) + 1;
     }
 }
 
