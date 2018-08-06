@@ -1,11 +1,3 @@
-//
-//  main.cpp
-//  queue
-//
-//  Created by Michael on 17.09.17.
-//  Copyright (c) 2017 mvcion. All rights reserved.
-//
-
 
 /*
  * Реализовать очередь с динамическим зацикленным буфером.
