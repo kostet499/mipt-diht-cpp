@@ -49,7 +49,7 @@ template<typename T>
 int FindMaxElement (T* list, int n);
 
 
-int main() 
+int main () 
 {
     int n = 0;
     assert(scanf("%d", &n));
