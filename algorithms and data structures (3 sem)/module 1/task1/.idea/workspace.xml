@@ -26,19 +26,15 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="98" column="33" selection-start-line="98" selection-start-column="33" selection-end-line="98" selection-end-column="33" />
+            <state relative-caret-position="360">
+              <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
               <folding>
-                <element signature="e#0#35#0" expanded="true" />
-                <element signature="e#197#641#1" />
-                <element signature="e#645#1019#1" />
-                <element signature="e#1023#1392#1" />
-                <element signature="e#1480#1604#0" />
-                <element signature="e#1688#1888#0" />
-                <element signature="e#1890#1977#0" />
-                <element signature="e#2056#2241#0" />
-                <element signature="e#2243#2325#0" />
-                <element signature="e#2328#2660#0" />
+                <element signature="e#0#32#0" expanded="true" />
+                <element signature="e#714#843#1" />
+                <element signature="e#847#975#1" />
+                <element signature="e#1192#1431#0" />
+                <element signature="e#1433#1571#0" />
+                <element signature="e#1573#1744#0" />
               </folding>
             </state>
           </provider>
@@ -69,6 +65,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -80,13 +77,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -119,12 +116,13 @@
       <option name="presentableId" value="Default" />
       <updated>1536607490912</updated>
       <workItem from="1536607498205" duration="3384000" />
-      <workItem from="1536652978769" duration="1283000" />
+      <workItem from="1536652978769" duration="3505000" />
+      <workItem from="1536683949631" duration="2718000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4667000" />
+    <option name="totallyTimeSpent" value="9607000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -132,15 +130,15 @@
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24983476" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" weight="0.32909605" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32909605" />
       <window_info anchor="bottom" id="CMake" order="7" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.0" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.28107345" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32909605" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -158,44 +156,51 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="7" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1962">
-          <caret line="109" column="21" lean-forward="true" selection-start-line="109" selection-start-column="21" selection-end-line="109" selection-end-column="21" />
+        <state relative-caret-position="594">
+          <caret line="33" column="32" selection-end-line="141" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
-            <element signature="e#197#641#1" />
-            <element signature="e#645#1019#1" />
-            <element signature="e#1023#1392#1" />
-            <element signature="e#1480#1604#0" />
-            <element signature="e#1688#1888#0" />
-            <element signature="e#1890#1977#0" />
-            <element signature="e#2056#2241#0" />
-            <element signature="e#2243#2325#0" />
-            <element signature="e#2328#2660#0" />
+            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#714#843#1" />
+            <element signature="e#847#975#1" />
+            <element signature="e#1192#1431#0" />
+            <element signature="e#1433#1571#0" />
+            <element signature="e#1573#1744#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="98" column="33" selection-start-line="98" selection-start-column="33" selection-end-line="98" selection-end-column="33" />
+        <state relative-caret-position="1962">
+          <caret line="109" column="21" lean-forward="true" selection-start-line="109" selection-start-column="21" selection-end-line="109" selection-end-column="21" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
-            <element signature="e#197#641#1" />
-            <element signature="e#645#1019#1" />
-            <element signature="e#1023#1392#1" />
-            <element signature="e#1480#1604#0" />
-            <element signature="e#1688#1888#0" />
-            <element signature="e#1890#1977#0" />
-            <element signature="e#2056#2241#0" />
-            <element signature="e#2243#2325#0" />
-            <element signature="e#2328#2660#0" />
+            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#714#843#1" />
+            <element signature="e#847#975#1" />
+            <element signature="e#1192#1431#0" />
+            <element signature="e#1433#1571#0" />
+            <element signature="e#1573#1744#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#714#843#1" />
+            <element signature="e#847#975#1" />
+            <element signature="e#1192#1431#0" />
+            <element signature="e#1433#1571#0" />
+            <element signature="e#1573#1744#0" />
           </folding>
         </state>
       </provider>
