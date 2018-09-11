@@ -14,7 +14,7 @@ public:
 
   virtual void operator() (const std::string &pattern,
                            const std::string &source,
-                           std::vector<std::size_t> &matching) const = 0;
+                           std::vector<std::size_t> &matching) = 0;
 
   virtual void Reset (const std::string &pattern, const std::string &source) = 0;
 
@@ -35,13 +35,13 @@ public:
 
   void operator() (const std::string &pattern,
                    const std::string &source,
-                   std::vector<std::size_t> &matching) const override;
+                   std::vector<std::size_t> &matching) override;
 
   void Reset (const std::string &pattern, const std::string &source) override;
 };
 
 
-class CZFunctor : public IStringFunctor
+class CZetaFunctor : public IStringFunctor
 {
 
 public:
@@ -50,7 +50,7 @@ public:
 
   void operator() (const std::string &pattern,
                    const std::string &source,
-                   std::vector<std::size_t> &matching) const override;
+                   std::vector<std::size_t> &matching) override;
 
   void Reset (const std::string &pattern, const std::string &source) override;
 };
@@ -62,7 +62,7 @@ void HandleRequest (std::istream &is, std::ostream &os, IStringFunctor &functor)
 int main ()
 {
   CPrefixFunctor functor;
-  // CZFunctor functor;
+  // CZetaFunctor functor;
   HandleRequest(std::cin, std::cout, functor);
   return 0;
 }
@@ -70,37 +70,48 @@ int main ()
 
 void CPrefixFunctor::operator() (std::vector<std::size_t> &matching) const
 {
+  if (pattern.empty() || source.empty())
+  {
+    throw std::invalid_argument(R"("pattern" & "source" should be not empty)");
+  }
 
 }
 
 void CPrefixFunctor::operator() (const std::string &pattern,
                                  const std::string &source,
-                                 std::vector<std::size_t> &matching) const
+                                 std::vector<std::size_t> &matching)
 {
-
+  Reset(pattern, source);
+  this->operator()(matching);
 }
 
 void CPrefixFunctor::Reset (const std::string &pattern, const std::string &source)
 {
-
+  this->pattern = pattern;
+  this->source = source;
 }
 
 
-void CZFunctor::operator() (std::vector<std::size_t> &matching) const
+void CZetaFunctor::operator() (std::vector<std::size_t> &matching) const
 {
-
+  if (pattern.empty() || source.empty())
+  {
+    throw std::invalid_argument(R"("pattern" & "source" should be not empty)");
+  }
 }
 
-void CZFunctor::operator() (const std::string &pattern,
+void CZetaFunctor::operator() (const std::string &pattern,
                             const std::string &source,
-                            std::vector<std::size_t> &matching) const
+                            std::vector<std::size_t> &matching)
 {
-
+  Reset(pattern, source);
+  this->operator()(matching);
 }
 
-void CZFunctor::Reset (const std::string &pattern, const std::string &source)
+void CZetaFunctor::Reset (const std::string &pattern, const std::string &source)
 {
-
+  this->pattern = pattern;
+  this->source = source;
 }
 
 
@@ -109,6 +120,7 @@ void HandleRequest (std::istream &is, std::ostream &os, IStringFunctor &functor)
   std::string pattern;
   std::string source;
   is >> pattern >> source;
+  pattern = "";
   std::vector<std::size_t> matching;
   functor.Reset(pattern, source);
   functor(pattern, source, matching);

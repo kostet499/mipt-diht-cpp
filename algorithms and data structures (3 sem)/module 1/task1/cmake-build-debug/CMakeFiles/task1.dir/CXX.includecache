@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/tsion/Desktop/mipt-diht-cpp/algorithms and data structures (3 sem)/module 1/task1/main.cpp
+cstddef
+-
+iostream
+-
+stdexcept
+-
+string
+-
+vector
+-
+
