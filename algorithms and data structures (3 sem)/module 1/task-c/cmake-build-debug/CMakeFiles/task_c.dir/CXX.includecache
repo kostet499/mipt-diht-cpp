@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mvcion/Desktop/task-c/CDeterministicFiniteAutomaton.cpp
+CDeterministicFiniteAutomaton.h
+/home/mvcion/Desktop/task-c/CDeterministicFiniteAutomaton.h
+
+/home/mvcion/Desktop/task-c/CDeterministicFiniteAutomaton.h
+stdexcept
+-
+unordered_map
+-
+ahocorasick.h
+/home/mvcion/Desktop/task-c/ahocorasick.h
+
+/home/mvcion/Desktop/task-c/ahocorasick.cpp
+ahocorasick.h
+/home/mvcion/Desktop/task-c/ahocorasick.h
+
+/home/mvcion/Desktop/task-c/ahocorasick.h
+string
+-
+vector
+-
+
+/home/mvcion/Desktop/task-c/main.cpp
+iostream
+-
+CDeterministicFiniteAutomaton.h
+/home/mvcion/Desktop/task-c/CDeterministicFiniteAutomaton.h
+

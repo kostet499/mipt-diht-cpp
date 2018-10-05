@@ -1,3 +1,0 @@
-C:/Users/tsion/Desktop/mipt-diht-cpp/algorithms and data structures (3 sem)/module 1/task1/cmake-build-debug/CMakeFiles/task1.dir
-C:/Users/tsion/Desktop/mipt-diht-cpp/algorithms and data structures (3 sem)/module 1/task1/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/tsion/Desktop/mipt-diht-cpp/algorithms and data structures (3 sem)/module 1/task1/cmake-build-debug/CMakeFiles/rebuild_cache.dir

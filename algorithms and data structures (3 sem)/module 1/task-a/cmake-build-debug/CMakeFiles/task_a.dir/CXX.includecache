@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/mvcion/Desktop/task-a/CZFunctor.cpp
+CZFunctor.h
+/home/mvcion/Desktop/task-a/CZFunctor.h
+
+/home/mvcion/Desktop/task-a/CZFunctor.h
+iostream
+-
+IStringFunctor.h
+/home/mvcion/Desktop/task-a/IStringFunctor.h
+
+/home/mvcion/Desktop/task-a/IStringFunctor.cpp
+IStringFunctor.h
+/home/mvcion/Desktop/task-a/IStringFunctor.h
+
+/home/mvcion/Desktop/task-a/IStringFunctor.h
+algorithm
+-
+cstddef
+-
+string
+-
+vector
+-
+
+/home/mvcion/Desktop/task-a/main.cpp
+iostream
+-
+IStringFunctor.h
+/home/mvcion/Desktop/task-a/IStringFunctor.h
+CZFunctor.h
+/home/mvcion/Desktop/task-a/CZFunctor.h
+

@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/task_b.dir/main.cpp.o CMakeFiles/task_b.dir/prefixfunctransformation.cpp.o CMakeFiles/task_b.dir/zfunctransformation.cpp.o CMakeFiles/task_b.dir/crossfunctransformation.cpp.o  -o task_b 
