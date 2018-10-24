@@ -29,9 +29,9 @@ void CZFunctor::operator() (std::istream &is, std::ostream &os,
   auto finding_max_matching = [&] () -> bool
   {
     bool is_suitable_size = cyclic_buffer[cyclic_buffer_index] < pattern_size;
-    auto i = (source_index + cyclic_buffer[cyclic_buffer_index]) % pattern_size;
-    auto j = cyclic_buffer[cyclic_buffer_index];
-    bool last_char_match = (source_substring[i] == pattern[j]);
+    auto source_ind = (source_index + cyclic_buffer[cyclic_buffer_index]) % pattern_size;
+    auto pattern_ind = cyclic_buffer[cyclic_buffer_index];
+    bool last_char_match = (source_substring[source_ind] == pattern[pattern_ind]);
     return is_suitable_size && last_char_match;
   };
 
@@ -42,7 +42,7 @@ void CZFunctor::operator() (std::istream &is, std::ostream &os,
     if (source_index <= right)
     {
       cyclic_buffer[cyclic_buffer_index] = std::min(
-          (int) (pattern_z_function[source_index - left]),
+          static_cast<int>(pattern_z_function[source_index - left]),
           right - source_index + 1
       );
     }

@@ -1,8 +1,6 @@
 #include "IStringFunctor.h"
 
-
 std::string IStringFunctor::STRING_DIVIDER = "$";
-
 
 void IStringFunctor::operator() (const std::string &pattern,
                                  const std::string &source,

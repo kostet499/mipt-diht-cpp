@@ -1,6 +1,5 @@
 /* ContestID: 12224903 */
 
-
 #include <iostream>         // std::ios, std::cin, std::cout
 
 #include "IStringFunctor.h" // IStringFunctor
@@ -10,7 +9,6 @@
 void HandleRequest (std::istream &is, std::ostream &os,
                     const IStringFunctor &functor, bool optimized = false);
 
-
 int main ()
 {
   std::ios::sync_with_stdio(false);
@@ -19,7 +17,6 @@ int main ()
   HandleRequest(std::cin, std::cout, functor, true);
   return 0;
 }
-
 
 void HandleRequest (std::istream &is, std::ostream &os,
                     const IStringFunctor &functor, bool optimized)
@@ -42,7 +39,3 @@ void HandleRequest (std::istream &is, std::ostream &os,
     }
   }
 }
-
-
-
-

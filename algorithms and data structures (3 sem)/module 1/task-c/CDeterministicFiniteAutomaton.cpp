@@ -1,6 +1,13 @@
 #include "CDeterministicFiniteAutomaton.h"
 
 
+using ahocorasick::CState;
+using ahocorasick::ComputeTransition;
+using ahocorasick::ENTRY_POINT;
+using ahocorasick::NULL_CSTATE_LINK;
+using ahocorasick::NULL_NEXT_CSTATE;
+
+
 void CDeterministicFiniteAutomaton::Build
     (const std::vector<std::string> &patterns, const std::vector<int> &patterns_indexes)
 {
@@ -14,8 +21,8 @@ void CDeterministicFiniteAutomaton::Build
   }
 }
 
-void CDeterministicFiniteAutomaton::FindAllEntries (const std::string &text,
-                                                    std::vector<int> &entries, int total_pattern_size)
+void CDeterministicFiniteAutomaton::FindAllEntries
+  (const std::string &text, std::vector<int> &entries, int total_pattern_size)
 {
   entries.clear();
   if (static_cast<int>(text.size()) - total_pattern_size >= 0)
@@ -39,114 +46,98 @@ void CDeterministicFiniteAutomaton::FindAllEntries (const std::string &text,
 
 void CDeterministicFiniteAutomaton::reset ()
 {
-  states.clear();
   precalculation.clear();
   patterns_sizes.clear();
   patterns_indexes.clear();
-  states.emplace_back(CState(ahocorasick::ENTRY_POINT, '\0', false));
-  states[ahocorasick::ENTRY_POINT].suffix_link = ahocorasick::ENTRY_POINT;
+  trie.Reset();
+  trie.GetNode(ENTRY_POINT).suffix_link = ENTRY_POINT;
 }
 
 void CDeterministicFiniteAutomaton::addStates (const std::string &word, int word_num)
 {
-  int prev_state_index = 0;
-  for (auto letter: word)
-  {
-    auto transition = computeTransition(letter);
-    if (states[prev_state_index].next_state[transition] == ahocorasick::NULL_NEXT_CSTATE)
-    {
-      states[prev_state_index].next_state[transition] = static_cast<int>(states.size());
-      states.emplace_back(CState(prev_state_index, letter, false));
-    }
-    prev_state_index = states[prev_state_index].next_state[transition];
-  }
-  states[prev_state_index].words_end_nums.emplace_back(word_num);
+  int prev_state_index = trie.AddNodes(word);
+  trie.GetNode(prev_state_index).words_end_nums.emplace_back(word_num);
 }
 
 int CDeterministicFiniteAutomaton::computeSuffixLink (int state_ind)
 {
-  if (states[state_ind].suffix_link == ahocorasick::NULL_CSTATE_LINK)
+  CState& state = trie.GetNode(state_ind);
+  if (state.suffix_link == NULL_CSTATE_LINK)
   {
-    if (state_ind != ahocorasick::ENTRY_POINT && states[state_ind].prev_state != ahocorasick::ENTRY_POINT)
+    if (state_ind != ENTRY_POINT && state.prev_state != ENTRY_POINT)
     {
-      states[state_ind].suffix_link = computeAutomateMove(
-          computeSuffixLink(states[state_ind].prev_state),
-          states[state_ind].transition
+      state.suffix_link = computeAutomateMove(
+          computeSuffixLink(state.prev_state),
+          state.transition
       );
     }
     else
     {
-      states[state_ind].suffix_link = ahocorasick::ENTRY_POINT;
+      state.suffix_link = ENTRY_POINT;
     }
   }
-  return states[state_ind].suffix_link;
+  return state.suffix_link;
 }
 
 int CDeterministicFiniteAutomaton::computeSuffixTerminatedLink (int state_ind)
 {
-  if (states[state_ind].suffix_terminated_link == ahocorasick::NULL_CSTATE_LINK)
+  CState& state = trie.GetNode(state_ind);
+  if (state.suffix_terminated_link == NULL_CSTATE_LINK)
   {
     int link = computeSuffixLink(state_ind);
-    if (link == ahocorasick::ENTRY_POINT)
+    if (link == ENTRY_POINT)
     {
-      states[state_ind].suffix_terminated_link =  ahocorasick::ENTRY_POINT;
+      state.suffix_terminated_link =  ENTRY_POINT;
     }
-    else if (states[link].HasWordsEnds())
+    else if (trie.GetNode(link).HasWordsEnds())
     {
-      states[state_ind].suffix_terminated_link = link;
+      state.suffix_terminated_link = link;
     }
     else
     {
-      states[state_ind].suffix_terminated_link = computeSuffixTerminatedLink(link);
+      state.suffix_terminated_link = computeSuffixTerminatedLink(link);
     }
   }
-  return states[state_ind].suffix_terminated_link;
+  return state.suffix_terminated_link;
 }
 
 int CDeterministicFiniteAutomaton::computeAutomateMove (int state_ind, char transition_letter)
 {
-  auto transition = computeTransition(transition_letter);
-  if (states[state_ind].automate_move[transition] == ahocorasick::NULL_CSTATE_LINK)
+  int transition = ComputeTransition(transition_letter);
+  CState& state = trie.GetNode(state_ind);
+  if (state.automate_move[transition] == NULL_CSTATE_LINK)
   {
-    if (states[state_ind].next_state[transition] != ahocorasick::NULL_NEXT_CSTATE)
+    if (state.next_state[transition] != NULL_NEXT_CSTATE)
     {
-      states[state_ind].automate_move[transition] =
-          states[state_ind].next_state[transition];
+      state.automate_move[transition] = state.next_state[transition];
     }
     else
     {
-      if (state_ind == ahocorasick::ENTRY_POINT)
+      if (state_ind == ENTRY_POINT)
       {
-        states[state_ind].automate_move[transition] = ahocorasick::ENTRY_POINT;
+        state.automate_move[transition] = ENTRY_POINT;
       }
       else
       {
-        states[state_ind].automate_move[transition] =
-            computeAutomateMove(computeSuffixLink(state_ind), transition_letter);
+        state.automate_move[transition] = computeAutomateMove(
+            computeSuffixLink(state_ind), transition_letter
+        );
       }
     }
   }
-  return states[state_ind].automate_move[transition];
+  return state.automate_move[transition];
 }
 
-int CDeterministicFiniteAutomaton::computeTransition (char transition)
-{
-  auto transition_code = static_cast<int>(transition - 'a');
-  if (transition_code >= ahocorasick::ALPHABET_SIZE)
-  {
-    throw std::length_error("Wrong size of alphabet");
-  }
-  return transition_code;
-}
 
 std::vector<int>* CDeterministicFiniteAutomaton::computeAccessibleStates (int state_ind)
 {
-  if (!states[state_ind].is_terminal)
+  CState& state = trie.GetNode(state_ind);
+  if (!state.is_terminal)
   {
-    states[state_ind].is_terminal = true;
+    state.is_terminal = true;
     int good_link = computeSuffixTerminatedLink(state_ind);
     zipped_links_traversal[state_ind] = *computeAccessibleStates(good_link);
-    for (auto visited_state_ind: states[state_ind].words_end_nums)
+    for (auto visited_state_ind: state.words_end_nums)
     {
       zipped_links_traversal[state_ind].emplace_back(visited_state_ind);
     }

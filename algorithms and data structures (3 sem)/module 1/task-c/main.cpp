@@ -1,5 +1,5 @@
-/* ContestID: 12356949 */
-
+/* ContestID: 12356949 (2018, not fixed) */
+/* ContestID: 12596266 (2017, fixed)     */
 
 #include <iostream>                        // std::cin, std::cout
 

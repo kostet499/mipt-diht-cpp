@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/task_c.dir/main.cpp.o CMakeFiles/task_c.dir/ahocorasick.cpp.o CMakeFiles/task_c.dir/CDeterministicFiniteAutomaton.cpp.o  -o task_c 

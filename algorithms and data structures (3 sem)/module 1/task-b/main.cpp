@@ -5,9 +5,8 @@
 #include <stdexcept> // std::invalid_argument
 #include <vector>    // std::vector
 
-
-#include "prefixfunctransformation.h"
-#include "zfunctransformation.h"
+#include "prefix_func.h"
+#include "z_func.h"
 
 
 void Read (std::vector<int> &func_values);
@@ -16,8 +15,8 @@ int main ()
 {
   std::vector<int> func_values;
   Read(func_values);
-  //std::cout << prefixfunctransformation::ConvertPrefixFunctionIntoString(func_values);
-  //std::cout << zfunctransformation::ConvertZFunctionIntoString(func_values);
+  //std::cout << prefix_func::ConvertPrefixFunctionIntoString(func_values);
+  //std::cout << z_func::ConvertZFunctionIntoString(func_values);
   return 0;
 }
 
@@ -35,11 +34,3 @@ void Read (std::vector<int> &func_values)
     func_values.emplace_back(function_value);
   }
 }
-
-
-
-
-
-
-
-

@@ -1,4 +1,0 @@
-/home/mvcion/Desktop/clion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/mvcion/Desktop/task-c
--- Configuring done
--- Generating done
--- Build files have been written to: /home/mvcion/Desktop/task-c/cmake-build-debug

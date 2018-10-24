@@ -1,9 +1,9 @@
 #ifndef TASK_C_AHOCORASICK_H
 #define TASK_C_AHOCORASICK_H
 
-
-#include <string> // std::string
-#include <vector> // std::vector
+#include <stdexcept>  // std::length_error
+#include <string>     // std::string
+#include <vector>     // std::vector
 
 
 namespace ahocorasick
@@ -27,7 +27,7 @@ namespace ahocorasick
     std::vector<int> words_end_nums;
   };
 
+  int ComputeTransition (char transition);
 };
-
 
 #endif //TASK_C_AHOCORASICK_H

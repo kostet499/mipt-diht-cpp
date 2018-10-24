@@ -3,4 +3,4 @@ project(task_c)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(task_c main.cpp ahocorasick.cpp ahocorasick.h CDeterministicFiniteAutomaton.cpp CDeterministicFiniteAutomaton.h)
+add_executable(task_c main.cpp ahocorasick.cpp ahocorasick.h CDeterministicFiniteAutomaton.cpp CDeterministicFiniteAutomaton.h trie.h)

@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/task_a.dir/main.cpp.o CMakeFiles/task_a.dir/IStringFunctor.cpp.o CMakeFiles/task_a.dir/CZFunctor.cpp.o  -o task_a 
