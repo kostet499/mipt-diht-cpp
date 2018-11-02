@@ -1,3 +1,0 @@
-/home/mvcion/Desktop/suffix-array/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/mvcion/Desktop/suffix-array/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/mvcion/Desktop/suffix-array/cmake-build-debug/CMakeFiles/suffix_array.dir

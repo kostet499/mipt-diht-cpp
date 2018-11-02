@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/suffix_array.dir/main.cpp.o  -o suffix_array 
