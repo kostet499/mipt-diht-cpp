@@ -31,7 +31,6 @@ inline void readElements(vector<int>& list);
 inline void printElements(vector<int>& list);
 
 
-
 /*
  Return index of the pivot
  (method: median of triple: begin, middle, end)
