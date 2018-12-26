@@ -1,29 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int N;
-int *A;
-int *B;
-int *R;
 
-extern void summ();
+extern float
+dot_product (int N, const float *A, const float *B);
 
-extern void everyday795(int X, int Y);
-
-int 
-main()
+int
+main ()
 {
-	everyday795(3, 7);
-	N=3;
-	A=(int*)malloc(N * sizeof(int));
-	B=(int*)malloc(N * sizeof(int));
-	R=(int*)malloc(N * sizeof(int));
-	A[0] = B[1] = A[2] = 40;
-	B[0] = A[1] = B[2] = 4;
-	summ();
-	for (int i = 0; i < N; i++)
-	{
-		printf("\n->%d", R[i]);
-	}
-	return 0;
+  int N;
+  scanf("%d", &N);
+  float *A = (float *) malloc(N * sizeof(float));
+  float *B = (float *) malloc(N * sizeof(float));
+  for (int i = 0; i < N; i++)
+  {
+    scanf("%f", &A[i]);
+  }
+  for (int i = 0; i < N; i++)
+  {
+    scanf("%f", &B[i]);
+  }
+  printf("%f\n", dot_product(N, A, B));
+  return 0;
 }

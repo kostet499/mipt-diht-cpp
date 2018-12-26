@@ -1,0 +1,5 @@
+#!/bin/bash
+
+gcc -m32 -masm=intel -nostdlib -s asm.s -o a.out
+./a.out
+rm -f a.out

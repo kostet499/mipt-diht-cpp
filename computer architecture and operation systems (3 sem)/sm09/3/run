@@ -1,0 +1,5 @@
+#!/bin/bash
+
+i686-w64-mingw32-gcc main.c
+WINDEBUG=-all wine a.exe input_bin
+rm -f a.exe

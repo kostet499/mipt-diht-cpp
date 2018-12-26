@@ -1,61 +1,57 @@
     .intel_syntax noprefix
-	
-    .data
-        scanf_fmt:
-	        .string "%d"
-        p_printf_fmt:
-	        .long printf_fmt
-        printf_fmt:
-	        .string	"%d\n"
 
     .text
-        .global everyday795
-        .global summ
+        .global dot_product
 
 
-everyday795:
-	push	ebp
-	mov	ebp, esp
-	sub	esp, 4
-	push	ebx
-	mov	ebx, ebp
-	sub	ebx, 4
-	push	ebx
-	mov	ebx, offset scanf_fmt
-	push	ebx
-	call 	scanf
-	add	esp, 8
-	mov	ebx, [ebp-4]
-	imul	ebx, [ebp+8]
-	add	ebx, [ebp+12]
-	push	ebx
-	mov	ebx, p_printf_fmt
-	push	ebx
-	call	printf
-	add	esp, 8
-	pop	ebx
-	mov	esp, ebp
-	pop 	ebp
-	ret
+dot_product:
 
-    
-summ:
-	push	ebx
-	mov	ecx, N
-	cycle:		
-		dec	ecx
-        mov	ebx, ecx		
-        mov	edx, A
-		mov	eax, [edx+4*ebx]
-		mov	edx, B
-		add	eax, [edx+4*ebx]
-		mov	edx, R
-		mov	[edx+4*ebx], eax
-        inc ecx
-		loop	cycle
-	pop	ebx
-	ret
+	push        ebp
+	mov         ebp, esp
 
+    push        ecx
+	mov         ecx, [ebp + 8]
+	push        esi
+	mov         esi, [ebp + 12]
+	push        edi
+	mov         edi, [ebp + 16]
+	push        eax
+	mov         eax, 0
+	cvtsi2ss    xmm0, eax
+	/*
+	    ecx  = N
+	    esi  = addr of A
+	    edi  = arrd of B
+	    eax  = counter
+	    xmm0 = answer
+	*/
+    jmp         .loop
 
+    .loop:
 
+        movups      xmm2, [esi + eax*4]
+        movups      xmm1, [edi + eax*4]
 
+        dpps        xmm1, xmm2, 241
+        movss       xmm3, xmm1
+        addss       xmm0, xmm3
+
+        add         eax, 4
+        cmp         ecx, eax
+        jg         .loop
+        jmp         .finalize
+
+    .finalize:
+
+        pop         eax
+        pop         edi
+        pop         esi
+        pop         ecx
+
+        sub         esp, 4
+        movss       DWORD PTR [esp], xmm0
+        fld         DWORD PTR [esp]
+
+        mov		    esp, ebp
+        pop		    ebp
+        ret
