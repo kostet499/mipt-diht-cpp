@@ -54,13 +54,6 @@ private:
 };
 
 
-
-void ShowKthCommon (const std::string &arg0, const std::string &arg1, int64_t k_th);
-
-std::pair<std::size_t, std::size_t> ComputeRangeOfKthCommon
-    (const std::string &concated, std::size_t arg0_size, std::size_t arg1_size, int64_t k_th);
-
-
 int main ()
 {
   std::string data;
@@ -119,30 +112,30 @@ void CSuffixArray::ComputeLcp (std::vector<int32_t> &lcp) const
   int32_t lcp_value = 0;
   for (int32_t i = 0; i < data_size; ++i)
   {
-    if (sorted_suffixes[i] != data_size - 1)
-    {
-      auto j = permutation[sorted_suffixes[i] + 1];
-      auto check_suffixes_matching = [&] () -> bool
-      {
-        bool ith_out_of_range = i + lcp_value >= data_size;
-        bool jth_out_of_range = j + lcp_value >= data_size;
-        if (ith_out_of_range || jth_out_of_range)
-        {
-          return false;
-        }
-        bool suffixes_matching = source[i + lcp_value] == source[j + lcp_value];
-        return suffixes_matching;
-      };
-      for (; check_suffixes_matching(); ++lcp_value);
-      lcp[sorted_suffixes[i]] = lcp_value;
-      if (lcp_value > 0)
-      {
-        --lcp_value;
-      }
-    }
-    else
+
+    if (sorted_suffixes[i] == data_size - 1)
     {
       lcp_value = 0;
+      continue;
+    }
+    auto j = permutation[sorted_suffixes[i] + 1];
+    auto check_suffixes_matching = [&] () -> bool
+    {
+      bool ith_out_of_range = i + lcp_value >= data_size;
+      bool jth_out_of_range = j + lcp_value >= data_size;
+      if (ith_out_of_range || jth_out_of_range)
+      {
+        return false;
+      }
+      bool suffixes_matching = source[i + lcp_value] == source[j + lcp_value];
+      return suffixes_matching;
+    };
+    for (; check_suffixes_matching(); ++lcp_value)
+    {}
+    lcp[sorted_suffixes[i]] = lcp_value;
+    if (lcp_value > 0)
+    {
+      --lcp_value;
     }
   }
 }

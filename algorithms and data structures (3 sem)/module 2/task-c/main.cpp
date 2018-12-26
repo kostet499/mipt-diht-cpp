@@ -55,28 +55,28 @@ private:
 
 
 
-void ShowKthCommon (const std::string &arg0, const std::string &arg1, int64_t k_th);
+void ShowKthCommon (const std::string &lhs, const std::string &rhs, int64_t kth_common);
 
 std::pair<std::size_t, std::size_t> ComputeRangeOfKthCommon
-    (const std::string &concated, std::size_t arg0_size, std::size_t arg1_size, int64_t k_th);
+    (const std::string &concated, std::size_t lhs_size, std::size_t rhs_size, int64_t kth_common);
 
 
 int main ()
 {
-  std::string arg0, arg1;
-  int64_t k_th;
-  std::cin >> arg0 >> arg1 >> k_th;
-  ShowKthCommon(arg0, arg1, k_th);
+  std::string str_s, str_t;
+  int64_t kth_common;
+  std::cin >> str_s >> str_t >> kth_common;
+  ShowKthCommon(str_s, str_t, kth_common);
   return 0;
 }
 
 
-void ShowKthCommon (const std::string &arg0, const std::string &arg1, int64_t k_th)
+void ShowKthCommon (const std::string &lhs, const std::string &rhs, int64_t kth_common)
 {
-  std::string concated = arg0 + '!' + arg1;
-  std::size_t arg0_size = arg0.size();
-  std::size_t arg1_size = arg1.size();
-  auto range = ComputeRangeOfKthCommon(concated, arg0_size, arg1_size, k_th);
+  std::string concated = lhs + '!' + rhs;
+  std::size_t lhs_size = lhs.size();
+  std::size_t rhs_size = rhs.size();
+  auto range = ComputeRangeOfKthCommon(concated, lhs_size, rhs_size, kth_common);
   if (range.second - range.first <= 0 || range.second == concated.size() + 2)
   {
     std::cout << -1;
@@ -91,7 +91,7 @@ void ShowKthCommon (const std::string &arg0, const std::string &arg1, int64_t k_
 }
 
 std::pair<std::size_t, std::size_t> ComputeRangeOfKthCommon
-    (const std::string &concated, std::size_t arg0_size, std::size_t arg1_size, int64_t k_th)
+    (const std::string &concated, std::size_t lhs_size, std::size_t rhs_size, int64_t kth_common)
 {
   CSuffixArray suffix_array(concated);
   std::vector<int32_t> lcp_values;
@@ -100,14 +100,14 @@ std::pair<std::size_t, std::size_t> ComputeRangeOfKthCommon
   int64_t current_lcp = 0;
   int64_t previous_lcp = 0;
   auto is_from_different = \
-    [arg0_size, suffix_array, concated] (std::size_t idx1, std::size_t idx2)
+    [lhs_size, suffix_array, concated] (std::size_t idx1, std::size_t idx2)
   {
     std::size_t shorter_suffix = std::min(suffix_array[idx1], suffix_array[idx2]);
     std::size_t longer_suffix = std::max(suffix_array[idx1], suffix_array[idx2]);
-    return shorter_suffix < arg0_size && longer_suffix >= arg0_size + 1;
+    return shorter_suffix < lhs_size && longer_suffix >= lhs_size + 1;
   };
   std::size_t concated_idx = 2;
-  for (; concated_idx < (arg0_size + arg1_size + 1); ++concated_idx)
+  for (; concated_idx < (lhs_size + rhs_size + 1); ++concated_idx)
   {
     if (!is_from_different(concated_idx, concated_idx + 1))
     {
@@ -127,9 +127,9 @@ std::pair<std::size_t, std::size_t> ComputeRangeOfKthCommon
       else
       {
         current_lexical += current_lcp - previous_lcp;
-        if (current_lexical >= k_th)
+        if (current_lexical >= kth_common)
         {
-          auto substr_len = static_cast<std::size_t>(k_th + current_lcp - current_lexical);
+          auto substr_len = static_cast<std::size_t>(kth_common + current_lcp - current_lexical);
           auto from = static_cast<std::size_t>(suffix_array[concated_idx]);
           auto to = from + substr_len;
           return std::make_pair(from, to);
@@ -189,30 +189,28 @@ void CSuffixArray::ComputeLcp (std::vector<int32_t> &lcp) const
   int32_t lcp_value = 0;
   for (int32_t i = 0; i < data_size; ++i)
   {
-    if (sorted_suffixes[i] != data_size - 1)
-    {
-      auto j = permutation[sorted_suffixes[i] + 1];
-      auto check_suffixes_matching = [&] () -> bool
-      {
-        bool ith_out_of_range = i + lcp_value >= data_size;
-        bool jth_out_of_range = j + lcp_value >= data_size;
-        if (ith_out_of_range || jth_out_of_range)
-        {
-          return false;
-        }
-        bool suffixes_matching = source[i + lcp_value] == source[j + lcp_value];
-        return suffixes_matching;
-      };
-      for (; check_suffixes_matching(); ++lcp_value);
-      lcp[sorted_suffixes[i]] = lcp_value;
-      if (lcp_value > 0)
-      {
-        --lcp_value;
-      }
-    }
-    else
+    if (sorted_suffixes[i] == data_size - 1)
     {
       lcp_value = 0;
+      continue;
+    }
+    auto j = permutation[sorted_suffixes[i] + 1];
+    auto check_suffixes_matching = [&] () -> bool
+    {
+      bool ith_out_of_range = i + lcp_value >= data_size;
+      bool jth_out_of_range = j + lcp_value >= data_size;
+      if (ith_out_of_range || jth_out_of_range)
+      {
+        return false;
+      }
+      bool suffixes_matching = source[i + lcp_value] == source[j + lcp_value];
+      return suffixes_matching;
+    };
+    for (; check_suffixes_matching(); ++lcp_value);
+    lcp[sorted_suffixes[i]] = lcp_value;
+    if (lcp_value > 0)
+    {
+      --lcp_value;
     }
   }
 }
